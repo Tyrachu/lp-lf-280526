@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Parisien · 28 mai 2026 · 儿童保护立法 与 Sarkozy 上诉</title>
+<style>
+:root {
+  /* Le Parisien 品牌色 */
+  --lp-blue: #1AA8E5;
+  --lp-blue-dark: #0090D6;
+  --bg-quote: #F4FAFD;
+  --ink-zh: #0A3553;
+  --ink-fr: #1A4E73;
+
+  /* 通用 */
+  --noir: #181818;
+  --gris: #8B8B8B;
+  --gris-fonce: #3B3B3B;
+  --gris-clair: #666;
+  --gris-ligne: #D9D9D9;
+  --bg-annot: #FFF8E1;
+  --orange: #C7842F;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, "PingFang SC", "Hiragino Sans GB",
+               "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--noir);
+  background: #fff;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hanging-punctuation: allow-end;
+}
+
+em.fr, em {
+  font-style: italic;
+  word-break: keep-all;
+}
+
+/* ============================================
+   STICKY 控制栏
+   ============================================ */
+.sticky-ctrl {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--gris-ligne);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.notes-toggle {
+  background: #fff;
+  border: 1px solid var(--gris-ligne);
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-size: 12.5px;
+  color: var(--gris-fonce);
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s;
+}
+
+.notes-toggle:hover {
+  background: var(--bg-quote);
+  border-color: var(--lp-blue);
+  color: var(--lp-blue-dark);
+}
+
+.notes-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================
+   IG 风格头部
+   ============================================ */
+.ig-head {
+  max-width: 760px;
+  margin: 28px auto 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ig-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(
+    from 45deg,
+    #F58529 0deg,
+    #DD2A7B 80deg,
+    #8134AF 160deg,
+    #515BD4 220deg,
+    #1AA8E5 290deg,
+    #F58529 360deg
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ig-avatar-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--lp-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-weight: 900;
+  font-size: 26px;
+  color: #FFFFFF;
+  border: 2.5px solid #FFFFFF;
+  padding-bottom: 2px;
+}
+
+.ig-handle {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--noir);
+  letter-spacing: 0.2px;
+}
+
+/* ============================================
+   日期带 + 报刊招牌
+   ============================================ */
+.datestrip {
+  max-width: 760px;
+  margin: 16px auto 0;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--gris-clair);
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--lp-blue);
+  padding-bottom: 8px;
+}
+
+.claude-mark {
+  max-width: 760px;
+  margin: 8px auto 0;
+  padding: 0 20px;
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  font-size: 11.5px;
+  color: var(--gris);
+}
+
+/* ============================================
+   主标题(覆盖封面 teaser 形式)
+   ============================================ */
+.page-title {
+  font-family: "Times New Roman", Times, "Songti SC", "STSong", serif;
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+  color: var(--noir);
+  text-align: center;
+  margin: 28px auto 8px;
+  max-width: 720px;
+  padding: 0 20px;
+}
+
+.page-title-fr {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--gris-clair);
+  text-align: center;
+  margin: 0 auto 24px;
+  line-height: 1.4;
+  padding: 0 20px;
+}
+
+/* ============================================
+   TOC
+   ============================================ */
+.toc {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 24px 20px;
+  background: var(--bg-quote);
+  border-left: 3px solid var(--lp-blue);
+}
+
+.toc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--gris-ligne);
+  padding-bottom: 8px;
+}
+
+.toc-label {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--lp-blue-dark);
+  text-transform: uppercase;
+}
+
+.toc-reading {
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gris-fonce);
+}
+
+.toc ol {
+  list-style: none;
+  counter-reset: toc-counter;
+  padding: 0;
+  margin: 0;
+}
+
+.toc ol li {
+  counter-increment: toc-counter;
+  margin: 8px 0;
+  padding-left: 28px;
+  position: relative;
+}
+
+.toc ol li::before {
+  content: "0" counter(toc-counter);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: "Times New Roman", serif;
+  color: var(--lp-blue);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.toc a {
+  color: var(--noir);
+  text-decoration: none;
+  font-size: 15px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+
+.toc a:hover {
+  border-bottom-color: var(--lp-blue);
+}
+
+.toc-fr {
+  display: block;
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--gris-clair);
+  margin-top: 2px;
+}
+
+/* ============================================
+   文章结构
+   ============================================ */
+article {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section.story {
+  margin: 56px 0;
+  scroll-margin-top: 60px;
+}
+
+.rubrique {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--lp-blue-dark);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+h1.titre {
+  font-family: "Times New Roman", Times, "Songti SC", serif;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.3px;
+  color: var(--noir);
+  margin: 6px 0 8px;
+}
+
+.titre-fr {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--gris-clair);
+  margin-bottom: 18px;
+  line-height: 1.35;
+}
+
+.chapo {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--gris-fonce);
+  margin: 16px 0 18px;
+}
+
+.signature {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: var(--gris);
+  font-style: italic;
+  margin-bottom: 24px;
+  border-top: 1px solid var(--gris-ligne);
+  border-bottom: 1px solid var(--gris-ligne);
+  padding: 8px 0;
+}
+
+article p {
+  margin: 14px 0;
+}
+
+h2.intertitre {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--noir);
+  margin: 32px 0 12px;
+  line-height: 1.3;
+}
+
+/* ============================================
+   引语块
+   ============================================ */
+blockquote.lead {
+  background: var(--bg-quote);
+  border-left: 4px solid var(--lp-blue);
+  padding: 18px 22px;
+  margin: 28px 0;
+}
+
+blockquote.lead .zh {
+  font-family: "Times New Roman", Times, "Songti SC", serif;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink-zh);
+}
+
+blockquote.lead .fr {
+  font-family: "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-fr);
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--gris-ligne);
+}
+
+blockquote.lead .src {
+  display: block;
+  margin-top: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: var(--gris-clair);
+  font-style: normal;
+}
+
+.quote-fr {
+  background: var(--bg-quote);
+  padding: 2px 6px;
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--ink-fr);
+  border-radius: 2px;
+}
+
+/* ============================================
+   注释系统
+   ============================================ */
+.annot {
+  border-bottom: 1px dashed var(--lp-blue);
+  cursor: pointer;
+  position: relative;
+}
+
+.annot sup {
+  color: var(--lp-blue-dark);
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 1px;
+}
+
+.annot-text {
+  display: none;
+  background: var(--bg-annot);
+  border-left: 3px solid var(--orange);
+  padding: 12px 16px;
+  margin: 10px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--gris-fonce);
+}
+
+.notes-open .annot-text {
+  display: block;
+}
+
+.annot-text.open {
+  display: block;
+}
+
+/* ============================================
+   候选人侧栏
+   ============================================ */
+.encadre {
+  background: var(--bg-quote);
+  border-top: 3px solid var(--lp-blue);
+  padding: 18px 22px;
+  margin: 30px 0;
+}
+
+.encadre-label {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--lp-blue-dark);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.encadre h3 {
+  font-family: "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 4px 0 12px;
+  color: var(--noir);
+}
+
+.encadre p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin: 8px 0;
+}
+
+/* ============================================
+   章节内卡片(为多文章并置准备)
+   ============================================ */
+.card {
+  border-top: 1px solid var(--gris-ligne);
+  padding-top: 38px;
+  margin-top: 38px;
+}
+
+/* ============================================
+   "回到顶部"按钮
+   ============================================ */
+.back-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  background: var(--lp-blue-dark);
+  color: #fff;
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 50;
+}
+
+.back-top.visible {
+  display: flex;
+}
+
+.back-top svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   版权
+   ============================================ */
+.copyright {
+  max-width: 760px;
+  margin: 80px auto 40px;
+  padding: 24px 20px;
+  border-top: 2px solid var(--lp-blue);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--gris-clair);
+}
+
+.copyright .zh-block, .copyright .fr-block {
+  margin: 14px 0;
+}
+
+.copyright .fr-block {
+  font-style: italic;
+}
+
+.copyright .divider {
+  border-top: 1px solid var(--gris-ligne);
+  margin: 14px 0;
+}
+
+.copyright em.kiosque-link,
+.copyright .kiosque-link {
+  color: var(--lp-blue-dark);
+  font-style: italic;
+}
+
+.claude-mark-foot {
+  text-align: center;
+  margin-top: 20px;
+  font-style: italic;
+  font-size: 11.5px;
+  color: var(--gris);
+}
+
+/* ============================================
+   响应式
+   ============================================ */
+@media (max-width: 600px) {
+  .page-title { font-size: 28px; }
+  .page-title-fr { font-size: 13px; }
+  h1.titre { font-size: 28px; }
+  article p { font-size: 15.5px; }
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY 控制栏 -->
+<div class="sticky-ctrl">
+  <button class="notes-toggle" id="notesToggle">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+    </svg>
+    <span id="notesBtnLabel">Notes</span>
+  </button>
+</div>
+
+<!-- IG 风格头 -->
+<div class="ig-head">
+  <div class="ig-avatar">
+    <div class="ig-avatar-inner">P</div>
+  </div>
+  <div class="ig-handle">leparisien</div>
+</div>
+
+<!-- 主标题(封面 teaser 风格) -->
+<h1 class="page-title">一份保护儿童的「黑名单」 · Sarkozy 利比亚案上诉</h1>
+<div class="page-title-fr">«&nbsp;Une liste noire pour protéger les enfants&nbsp;»&nbsp;·&nbsp;«&nbsp;Sarkozy défend son honneur&nbsp;»</div>
+
+<!-- 日期带 -->
+<div class="datestrip">
+  JEUDI 28 MAI 2026 · N° 25430 · POLITIQUE & JUSTICE
+  <div style="text-transform: none; font-size: 10.5px; letter-spacing: 0.3px; color: var(--gris); margin-top: 5px; font-style: italic;">含《<em>Le Figaro</em>》N° 25426 同日报道补述(P. 8) · avec complément du <em>Figaro</em> du même jour</div>
+</div>
+
+<!-- Claude 印记 -->
+<div class="claude-mark">Claude [Anthropic] 译</div>
+
+<!-- TOC -->
+<nav class="toc" aria-label="目录">
+  <div class="toc-head">
+    <span class="toc-label">SOMMAIRE · 目录</span>
+    <span class="toc-reading">全文阅读约 17 分钟</span>
+  </div>
+  <ol>
+    <li>
+      <a href="#overview">本期摘译说明
+        <span class="toc-fr">Note de lecture</span></a>
+    </li>
+    <li>
+      <a href="#liste-noire">儿童性侵者「黑名单」
+        <span class="toc-fr">Une « liste noire » des agresseurs d'enfants</span></a>
+    </li>
+    <li>
+      <a href="#executif-accelere">政府加快脚步
+        <span class="toc-fr">L'exécutif accélère</span></a>
+    </li>
+    <li>
+      <a href="#sarkozy">Sarkozy 利比亚案上诉庭审最后一日
+        <span class="toc-fr">Procès en appel du financement libyen : dernier jour</span></a>
+    </li>
+  </ol>
+</nav>
+
+<article>
+
+<!-- ============================================
+     SECTION 0 — 本期摘译说明
+     ============================================ -->
+<section class="story" id="overview">
+  <div class="rubrique">NOTE DE LECTURE · 本期摘译说明</div>
+  <h1 class="titre">6 月 1 日辩论前夕</h1>
+  <p class="titre-fr">À la veille du débat du 1er juin</p>
+
+  <p>2026 年 6 月 1 日，国民议会将审议 <em>Spillebout</em>(<strong>RE</strong>)-<em>Vannier</em> 校园暴力法案──这是挑选本期 5 月 28 日《<em>Le Parisien</em>》(N° 25430)摘译的原因。P. 6 两篇报道直接覆盖与之相关的儿童保护立法节奏；P. 11 则是 <em>Sarkozy</em> 利比亚案上诉庭审最后一日。</p>
+
+  <p style="font-size: 11.5px; color: var(--gris-clair); margin-top: 14px; line-height: 1.55; font-style: italic;">6 月 1 日辩论事实核实来源：<em>franceinfo</em>(14/04/2026)· <em>LCP</em>(28/01/2026)· <em>ici.fr</em>(26/05/2026)· <em>vspillebout.fr</em>(02/2026)· <em>CNews</em>(27/05/2026)。</p>
+</section>
+
+<!-- ============================================
+     SECTION 1 — 黑名单
+     ============================================ -->
+<section class="story" id="liste-noire">
+  <div class="rubrique">POLITIQUE · 政治 · P. 6</div>
+  <h1 class="titre">丑闻之后，一份儿童性侵者「黑名单」</h1>
+  <p class="titre-fr">Après les scandales, une « liste noire » des agresseurs d'enfants</p>
+
+  <p class="chapo">一项将于 7 月审议的法案规定，凡有司法记录在案者──包括 13 岁以上的未成年人在内──将被排除在学校、医疗与社会服务机构之外。</p>
+
+  <div class="signature">Bérangère Lepetit · 阅读约 4 分钟</div>
+
+  <p>这个措辞令人过目不忘。在巴黎课后托管丑闻、以及各类公私立机构性侵案接连曝光之后，政府周三宣布，将在 7 月审议的儿童保护法案框架下，设立一份「黑名单」(« <em>liste noire</em> »)，对象不仅包括成年人，也包括 13 岁以上的未成年人。</p>
+
+  <p>协会志愿者、教育员、送货司机、厨师、青少年活动中心或夏令营的辅导员──凡是在儿童可能出入的场所工作、或临时介入的全部人员，都将纳入范围：公立或私立学校、医院、托儿所、课后托管，以及 <span class="annot" data-pop="ase">ASE<sup>*</sup></span><div class="annot-text" id="ase"><strong>ASE · Aide sociale à l'enfance</strong>：法国儿童社会救助系统。1983 年地方分权改革后划归省级(département)管理，负责对处于困境的未成年人进行行政与寄养安置。近年因系统超载、寄养事故、监管漏洞等问题屡受批评，2025 年起多份议会调查报告聚焦其失职。</div>系统下属机构，乃至文化体育类协会。名单上将登记所有因性犯罪、暴力犯罪或恐怖主义犯罪而受到投诉、举报或定罪的人员。</p>
+
+  <blockquote class="lead">
+    <div class="zh">「一个人若已在某个领域被禁入，就不能再从另一个领域回来。」</div>
+    <div class="fr">« Si une personne a été interdite dans un secteur, elle ne pourra pas revenir dans un autre. »</div>
+    <span class="src">── 卫生与家庭事务部长 <em>Stéphanie Rist</em> 的幕僚</span>
+  </blockquote>
+
+  <h2 class="intertitre">品行审查将定期进行</h2>
+
+  <p>具体来说，<span class="annot" data-pop="cnil">CNIL<sup>*</sup></span><div class="annot-text" id="cnil"><strong>CNIL · Commission nationale de l'informatique et des libertés</strong>：法国国家信息与自由委员会，1978 年成立的独立行政机构，负责监督个人数据保护与各类信息系统的合法性。涉及跨部门数据共享的方案，通常需先获其评估。</div>⁠、国民教育部与司法部将开始共享各自的档案系统。涉及的档案包括司法记录册、<span class="annot" data-pop="fijait">恐怖主义犯罪人自动司法档案(<em>FIJAIT</em>)<sup>*</sup></span><div class="annot-text" id="fijait"><strong>FIJAIT · Fichier judiciaire national automatisé des auteurs d'infractions terroristes</strong>：恐怖主义犯罪人国家自动司法档案库。由 2015 年 7 月 24 日第 2015-912 号《情报法》(loi relative au renseignement)创设，2015 年 12 月 29 日法令配套，2016 年 7 月 1 日正式运行，置于司法部下属国家司法记录中心管理，登记被判定犯有恐怖主义性质罪行的人员，相关机构可在指定情况下查询比对。</div>⁠，以及<span class="annot" data-pop="fijaisv">性犯罪与暴力犯罪人自动司法档案(<em>FIJAISV</em>)<sup>*</sup></span><div class="annot-text" id="fijaisv"><strong>FIJAISV · Fichier judiciaire national automatisé des auteurs d'infractions sexuelles ou violentes</strong>：性犯罪与暴力犯罪人国家自动司法档案库。源自 2004 年 3 月 9 日《Perben II 法案》设立的性犯罪档案(FIJAIS)，2005 年开始运行，后扩展纳入暴力犯罪(增 V)。登记已被定罪的性犯罪及严重暴力犯罪人员，便于警务、司法与有限范围的行政机构(如教育、体育、儿童领域)查询比对，是品行审查的关键数据基础。</div>⁠。「我们将以 360 度全方位审视品行审查这件事。必须确保儿童的成长环境是安全的。」国民教育部长 <em>Édouard Geffray</em> 的幕僚补充道。</p>
+
+  <p>与此同时，相关人员将获发「品行证明」(<em>attestation d'honorabilité</em>)。这份证明自 2016 年起，向雇主担保该教师无司法记录、也未列入性犯罪与暴力犯罪档案。过去只在入职时审查一次。今后将定期复查。</p>
+
+  <p>至于被安置在寄养家庭、或托付给所谓「可信第三人」(<em>tiers dignes de confiance</em>，即未成年人原已与之有依恋与信任关系的成年人)的儿童，则该家庭内年满 13 岁以上、与受安置儿童有接触的任何未成年人，同样要接受审查。</p>
+
+  <h2 class="intertitre">「还得走得更远，把预防做起来」</h2>
+
+  <p><span class="annot" data-pop="ciivise"><em>Ciivise</em><sup>*</sup></span><div class="annot-text" id="ciivise"><strong>Ciivise · Commission indépendante sur l'inceste et les violences sexuelles faites aux enfants</strong>：乱伦与儿童性侵独立调查委员会。2021 年 1 月由 Macron 在 #MeTooInceste 运动后宣布设立，最初由法官 Édouard Durand 与 Nathalie Mathieu 共同主持。2024 年 4 月改组为四人执行团；自 2024 年起由 Maryse Le Men-Régnier 任主任。已提出 82 条政策建议。任务期限延长至 2026 年 10 月。Face à l'inceste 协会于 2026 年 1 月退出该委员会，称其他成员在阻碍乱伦罪不可时效化的立法。</div>(乱伦与儿童性侵独立调查委员会)对这份法案表示赞赏，称其「超出了对专业从业者的审查范围，将儿童托管的家庭与准家庭环境也纳入其中──据估计，对未成年人实施强奸与性侵的施害者中，约有四分之一本身也是未成年人」。</p>
+
+  <p>另一边，反乱伦协会 <em>Face à l'inceste</em> 则担心这只是「姿态宣示」(« <em>effets d'annonce</em> »)。「这份黑名单让人放心，但许多施害者仍会继续躲过雷达──他们既未被立案，也从未被定罪。」协会一位发言人说，「还得走得更远，把预防做起来。品行证明有用，但不够。」</p>
+
+  <p>自 2025 年初 <span class="annot" data-pop="betharram"><em>Notre-Dame-de-Bétharram</em> 学校<sup>*</sup></span><div class="annot-text" id="betharram"><strong>Notre-Dame-de-Bétharram</strong>：位于 Pyrénées-Atlantiques 省 Lestelle-Bétharram 的天主教私立学校，由耶稣圣心会(Prêtres du Sacré-Cœur de Jésus de Bétharram)管理。2025 年 2 月，记者 Alain Esquerre 与 Mediapart 联合披露了长达半个多世纪的体罚与性侵指控，涉及上百名前学生，绝大多数案件因时效已过无法起诉。该案直接波及时任总理 <em>François Bayrou</em>──他在 1990 年代曾任国民教育部长，且其女儿亦在该校就读、后亦公开陈述曾遭体罚。LFI 议员 Paul Vannier 在国民议会就此连续质询 Bayrou 是否在 2024 年 3 月收到受害者来信。该案常被称为「比利牛斯山的古拉格」(« <em>goulag des Pyrénées</em> »)。</div>(位于 <em>Pyrénées-Atlantiques</em> 省)性侵案曝光以来，<em>Ciivise</em> 就主张针对「所有收容儿童的机构」建立一套统一机制，类似于体育系统的 <span class="annot" data-pop="signal-sports"><em>Signal-Sports</em><sup>*</sup></span><div class="annot-text" id="signal-sports"><strong>Cellule Signal-Sports</strong>：法国体育部下设的针对体育领域暴力(含性暴力)举报与处理小组，2019 年底由时任体育部长 Roxana Maracineanu 推出，2020 年 2 月正式启动「国家性暴力预防大会」。该机制将全国体育协会从业者及志愿者数据与 FIJAISV 等司法档案库自动比对，强制执行品行审查。截至 2025 年已立案处理逾 1500 人。当前体育部长为 Marina Ferrari。</div>举报小组。该小组于 2019 年底成立，已使 1500 余人被立案，其中 90% 涉及性暴力。这一机制由时任体育部长 <em>Roxana Maracineanu</em> 推动，强制要求所有与儿童有接触的从业者或志愿者接受品行审查。</p>
+
+  <p>4 月底发布的一份意见中，<em>Ciivise</em> 进一步要求建立「一条统一的可疑情况举报通道」。这部法案预计 7 月在国民议会进入审议。</p>
+</section>
+
+<!-- ============================================
+     SECTION 2 — L'exécutif accélère
+     ============================================ -->
+<section class="story" id="executif-accelere">
+  <div class="rubrique">POLITIQUE · 政治 · P. 6 · 配文</div>
+  <h1 class="titre">政府加快脚步</h1>
+  <p class="titre-fr">L'exécutif accélère</p>
+
+  <p class="chapo">在课后托管丑闻、Bétharram 案余波与对 ASE 系统的批评夹击下，Lecornu 政府决定加快立法节奏。议会同期还有另外三份儿童保护相关法案在推进。</p>
+
+  <div class="signature">Victor Delair · 阅读约 4 分钟</div>
+
+  <p>这是个高度敏感的议题，政府已经不能再等。</p>
+
+  <p>2025 年 6 月，政府宣布要重塑儿童保护体系，一份法案随之公布。近一年过去，<em>Sébastien Lecornu</em> 和他的部长们终于准备启动这份此前曾被许多人视为已经胎死腹中的法案。政府周三公布了具体内容，并保证这份现已扩展为保护「所有儿童」的法案，将于 7 月送达国民议会。而就在同一周，还有另外三份同样涉及儿童保护的法案正在议会审议之中。</p>
+
+  <p>巴黎课后托管性侵案掀起的舆论风暴──加上 <em>Bétharram</em> 案尚未平息的伤口、以及外界对 <em>ASE</em>(儿童社会救助系统)运作方式的强烈批评──令政府担心法案可能始终通不过，因此不得不加快节奏。「保护儿童不能等到明年的选举周期才办。」<em>Sébastien Lecornu</em> 在 X 上写道。与此同时，一位议会党团主席毫不客气地讽刺道：「他们心里清楚，夏天之前不投票的法案，就等于被埋了。」<span class="quote-fr">« Ils savent très bien que ce qui ne sera pas voté avant l'été sera enterré. »</span></p>
+
+  <h2 class="intertitre">国民议会一大堆相关法案同时审议</h2>
+
+  <p>面对紧迫的议程，政府选择了一份「瘦身版」法案。卫生部长 <em>Stéphanie Rist</em> 承认了这一点──她与司法部长 <em>Gérald Darmanin</em> 共同推进这份草案：「我们有可操作、法律上可落地的具体措施，能够推进得很快。」这些措施中包括：为存在不当行为的成年人和青少年设立「黑名单」，以及对所有负责儿童监管的人员「系统性核查司法记录」。</p>
+
+  <p>但相关业界认为这些措施缺乏雄心，更要命的是，它们与议会中已经处于推进阶段的一大批其他法案彼此交织。首先是一份<span class="annot" data-pop="loi-maurey">中间派阵营的法案<sup>*</sup></span><div class="annot-text" id="loi-maurey"><strong>Maurey 法案 · « Proposition de loi visant à permettre la mise en place d'une enquête administrative et le contrôle des antécédents judiciaires des personnels d'encadrement des enfants »</strong>：由参议员 Hervé Maurey(Union centriste，Eure 省)2026 年初提交，中间派与 LR 议员共同联署。法律委员会两位报告人为 Marie Mercier(LR)与 Olivia Richard(Horizons 党全国书记、参议院 Les Indépendants 群组成员)。原案为单一条款 article unique，委员会阶段经报告人重写后，把现有的品行证明(attestation d'honorabilité)制度普适化、强制化，作为所有接触未成年人岗位──学校、ASE、托儿所、périscolaire、家庭教师等──录用与续聘的前提。2026 年 5 月 27 日参议院通过。背景：截至 2026 年初，巴黎已暂停 78 名学校与课后托管工作人员，其中 31 名涉性侵嫌疑；该议题贯穿了刚结束的市政选举。</div>⁠，周三由参议院通过，针对的是监管人员的司法记录核查。还有一份 <strong>PS</strong> 提案，旨在保障每名被安置儿童都能获得律师协助；该案已在国民议会通过，参议员们周四开始审议。</p>
+
+  <p>此外，这还不包括旨在打击校园暴力的<span class="annot" data-pop="loi-betharram">「Bétharram 法案」<sup>*</sup></span><div class="annot-text" id="loi-betharram"><strong>Spillebout-Vannier 法案 · « Proposition de loi visant à prévenir et lutter contre les violences en milieu scolaire »</strong>(议会文件号 N° 2448，2026 年 2 月 4 日登记)：由 Violette Spillebout(EPR/RE)与 Paul Vannier(LFI)共同提交，多名议员联署。两人此前是 2025 年 Bétharram 议会调查委员会的两位共同报告人；调查报告于 2025 年 7 月发布，提出 50 条建议，本案将其中 23 条转化为立法。共 11 条条款，覆盖范围为学校与课外活动(école + périscolaire)。主要内容：第 1 条以国家名义承认在校与课外活动中对儿童犯下的身体、心理与性暴力的严重性，及国家在制止这些暴力上的失职；加强对所有学校工作人员的品行审查(录用前 + 至少每 3 年一次复查)；加强对工作人员违规处分的跟踪；延长部分针对未成年人的暴力犯罪的「未举报罪」(non-dénonciation)追诉时效；第 7 条对私立合约学校(établissements privés sous contrat)建立 5 年一次的国家检查机制；设立由教育部统辖、含受害者代表参与管理的赔偿与陪伴基金。最初由 Spillebout 与 Vannier 共同起草，后由 Spillebout 单独再次提交，最终两人共同推动。5 月 26-27 日委员会审议通过，由 Renaissance 议会党团用其议程权(niche parlementaire [国民议会按月分配给反对派党团及少数派党团的常规议程时段，与政府议程并行])安排 6 月 1 日国民议会会场辩论。</div>⁠。提案人是 <strong>RE</strong> 议员 <em>Violette Spillebout</em>，国民议会周一进入会场辩论。「政府本可以把所有这些法案打包处理，我们本可以换一种方式协作，让大家坐到一起。」<strong>PS</strong> 议员 <em>Isabelle Santiago</em> 表示遗憾──去年正是她发起了针对 <em>ASE</em> 失职问题的调查委员会。</p>
+
+  <p>另一边，<em>Élysée</em> 否认有任何加速意图，并重申这件事是政府与国家元首的「一项优先事项」。最终无论如何，<em>Violette Spillebout</em> 表示：「事情正在发生。我们正处在一个 <span class="annot" data-pop="metoo-hashtags"><strong>#MeTooÉcole</strong> 和 <strong>#MeTooPériscolaire</strong><sup>*</sup></span><div class="annot-text" id="metoo-hashtags"><strong>#MeTooÉcole · #MeTooPériscolaire</strong>：法国针对校园与课外教育领域儿童性暴力的两个话题标签，均为 #MeToo 运动在儿童与未成年人保护场域的延伸。<strong>#MeTooÉcole</strong> 由家长 Barka Zerouali 等于 2025 年 4 月发起(起因为巴黎一所幼儿园暴出严重事件)，同名公民运动(metooecole.org)随后成立，聚焦公私立学校与寄宿学校内部的性暴力与精神虐待，亦与 Bétharram、Stanislas 等案关联密切。<strong>#MeTooPériscolaire</strong> 则于 2025 年底至 2026 年初随巴黎课后托管系统大规模性侵丑闻爆发而兴起──截至 2026 年初，巴黎已暂停 78 名学校与课后托管工作人员，其中 31 名涉嫌性侵。</div>⁠ 开始推动政府与议会的时刻……每一条规定，都意味着多保护一个孩子。」</p>
+
+  <div class="encadre">
+    <div class="encadre-label">CONTEXTE · 背景</div>
+    <h3>同一议题，五条立法轨</h3>
+    <p>截至 5 月 28 日，议会中正在推进或即将提交的儿童保护相关立法包括──</p>
+    <p>① 政府主导的儿童保护法案(Rist + Darmanin，7 月入国民议会)；<br>
+    ② 中间派议员关于监管人员司法记录核查的法案(5 月 27 日参议院通过)；<br>
+    ③ <strong>PS</strong> 提案：保障被安置儿童的律师协助权利(已过国民议会，5 月 28 日参议院审议)；<br>
+    ④ <em>Violette Spillebout</em>(<strong>RE</strong>)提交的「Bétharram 法案」(6 月 1 日国民议会会场辩论)；<br>
+    ⑤ <em>Isabelle Santiago</em>(<strong>PS</strong>)2025 年发起的 <em>ASE</em> 失职调查委员会的后续建议。</p>
+    <p style="font-size: 12.5px; color: var(--gris-clair); font-style: italic; margin-top: 14px;">本侧栏内容来自 <em>Le Parisien</em> 28 mai 2026 报道明确陈述的法案清单。</p>
+  </div>
+</section>
+
+<!-- ============================================
+     SECTION 3 — Sarkozy
+     ============================================ -->
+<section class="story" id="sarkozy">
+  <div class="rubrique">POLICE-JUSTICE · 司法 · P. 11</div>
+  <h1 class="titre">Sarkozy 捍卫荣誉</h1>
+  <p class="titre-fr">Sarkozy défend son honneur</p>
+
+  <p class="chapo">利比亚融资疑案上诉庭审的最后一日，这位前总统再度高呼自己清白，并表达了对再次入狱的担忧。宣判定在 11 月 30 日。</p>
+
+  <div class="signature">Timothée Boutry (<em>Le Parisien</em>) · 阅读约 5 分钟  ·  Stéphane Durand-Souffland (<em>Le Figaro</em>) · 阅读约 4 分钟</div>
+
+  <p>直到 11 月 30 日──2007 年竞选活动利比亚融资疑案上诉庭宣判之日──<em>Nicolas Sarkozy</em> 都将「每天早上起床」和「每天晚上躺下」时反复自问：「我会不会再回去？」意思是再回到监狱里去。一审被定罪后，他已在那里关了二十天，而上诉庭检察机关已对他求刑七年实刑，希望他再度入狱。</p>
+
+  <p>在这场跨度长达 54 个庭审日的审判尾声──其间最具标志性的，是他与昔日最信任的老搭档 <em>Claude Guéant</em> 公开决裂──<em>Sarkozy</em> 获邀最后陈述时，再次声辩自己无罪。但这一次，情绪罕见地激动，颤抖的声音出卖了他。</p>
+
+  <blockquote class="lead">
+    <div class="zh">「这不是一场历史性审判，这不是一部小说，这是我的人生。」</div>
+    <div class="fr">« Ce n'est pas un procès historique, ce n'est pas un roman, c'est ma vie. »</div>
+    <span class="src">── Nicolas Sarkozy</span>
+  </blockquote>
+
+  <p>前总统低声说道，并坦承自己每次走上法庭，「就像走上<span class="annot" data-pop="chemin-de-croix">苦路」<sup>*</sup></span><div class="annot-text" id="chemin-de-croix"><strong>chemin de croix · 苦路</strong>：天主教受难节传统中耶稣背负十字架走向受刑地的路线，引申为「漫长而痛苦的考验」。Sarkozy 出身天主教家庭，使用这一宗教意象既呼应其受迫害的自我叙事，也在面对法官时援引文化共同语汇。</div>⁠。</p>
+
+  <p>在检方先前的求刑陈述中，他一次都没看过检察长的方向。这一次他却转头面向控方席，对其中两段陈述格外愤慨。「有人居然敢说我是在一场被操纵的选举中、2007 年 5 月当选的，」他说，「说出这话的人忘了一件事──那是法国历史上动员选民最多的一次选举。(……)这会伤害所有投票给我的人。这是我一生的战斗。(……)我不允许任何人说那是一场被操纵的选举。」</p>
+
+  <blockquote class="lead">
+    <div class="zh">「这会伤害所有投票给我的人。这是我一生的战斗。」</div>
+    <div class="fr">« Ça blesse tous ceux qui ont voté pour moi. C'est le combat de ma vie. »</div>
+    <span class="src">── Nicolas Sarkozy</span>
+  </blockquote>
+
+  <p>不过，在这位前国家元首看来，「最糟糕的」是被描述为「受外国势力影响」──尤其是 <em>Mouammar Kadhafi</em> 的影响。他提醒道，正是自己 2011 年与英国一道挂帅的联盟把卡扎菲推翻的。「检察长先生，求你了，别这样说。要怎么说都行，唯独不能这么说。」他恳求道。「我没有辜负法国人民的信任。」他特别向 <span class="annot" data-pop="dc10-uta"><em>UTA</em> 航空 <em>DC-10</em> 客机袭击案<sup>*</sup></span><div class="annot-text" id="dc10-uta"><strong>L'attentat du DC-10 d'UTA</strong>：1989 年 9 月 19 日，法国 UTA 航空公司一架 DC-10 客机由 N'Djamena 飞往巴黎途中，在尼日尔上空爆炸，170 人罹难，其中 54 名为法国公民。法国司法机关认定利比亚情报机构策划，其负责人 Abdallah Senoussi(卡扎菲的妹夫、利比亚情报二把手)被法国法庭于 1999 年缺席判处终身监禁。本案在 Sarkozy 利比亚融资疑案中被反复提及──控方认为，对 Senoussi 司法处境的「复审」可能是 Sarkozy 团队与卡扎菲政权之间利益交换的内容之一。</div>的受害者们强调。</p>
+
+  <h2 class="intertitre">亲信「圈子」成为焦点</h2>
+
+  <p>在此之前，他的四位律师轮流出场，试图拆解指控所讲的那部「荒诞小说」(« <em>roman grotesque</em> »)。率先发言的是 <em>Christophe Ingrain</em> 律师。他以一段结构严谨的辩护，矛头直指<span class="annot" data-pop="malfaiteurs">「犯罪团伙罪」(<em>association de malfaiteurs</em>)<sup>*</sup></span><div class="annot-text" id="malfaiteurs"><strong>association de malfaiteurs · 犯罪团伙罪</strong>：法国刑法第 450-1 条规定的「为筹划一项或多项犯罪而结成的群体或达成的协议」之罪，最高刑期可达十年。该罪名定罪门槛低于实际犯罪行为本身，常被作为「兜底罪名」使用──控方无须证明具体犯罪已发生，只须证明存在筹划与协议。Sarkozy 律师团此处所称的「救场用的罪名」(<em>une infraction de sauvetage</em>)，即指控方在其他三项实质性指控不成立的情况下，以此罪兜底定罪。一审中 Sarkozy 仅在此罪上被判有罪，corruption passive、financement illégal、recel 三项指控均被宣告无罪。</div>──四项被起诉罪名中，他的当事人在一审中唯一被定罪的那一项。「一项救场用的罪名。」他冷讽道，认为这只是为了掩盖控方「证据上的不足」。「我没听见多少有分量的东西，听见的只是一堆堆假设。」律师挖苦道。</p>
+
+  <p>一审审判中，<em>Claude Guéant</em> 与 <em>Brice Hortefeux</em> 同 <em>Abdallah Senoussi</em>──1989 年 <em>UTA</em> 航空 <em>DC-10</em> 袭击案的主谋──之间的会面，是判决的关键之一。「那些会面与所谓的利比亚融资无关，」<em>Ingrain</em> 律师肯定地说，「<em>Sarkozy</em> 既没有授权这些会面，也没有被告知。」按控方说法，关于这位在法国被缺席判处终身监禁的利比亚高层人物的司法处境复审一事，曾被考虑作为利益交换条件之一。同样，<em>Ingrain</em> 律师坚称他的当事人从未为此采取过任何行动。</p>
+
+  <p>该律师抨击检方所立的「预设」(« <em>postulat</em> »)──他们把这位前国家元首描绘成「犯罪团伙的主谋」(« <em>instigateur</em> »)。「可是指令在哪儿呢？难道仅凭我们想象中他在想什么，就可以把他定罪？这太离谱了。」</p>
+
+  <p>在求刑陈述中，检察长们提到围绕 <em>Sarkozy</em> 周围的亲信或中间人「圈子」(« <em>cercles</em> »)。「就因为『圈子』这个魔法词，所有人都被划进同一个犯罪团伙里。检方把人与人之间的关系，变成了有罪的指标。这是一种空洞的、人为的构建。」<em>Ingrain</em> 律师讥讽道。他同时抨击控方陈述里「最大的缺席者」(« <em>le grand absent</em> »)──作案动机：当时 <em>Sarkozy</em> 确信会获得 <strong>UMP</strong> 的支持。</p>
+
+  <p>在法律层面，这位律师强调，前总统受审是因为「听任其下属行事」。「但『听任』并不等于『参与』，」律师辩称，并请求法庭「搁置情绪」，按「一份毫无证据的案卷」应有的结论作出裁判。</p>
+
+  <p>至于 <em>Tristan Gautier</em> 律师──正如他在一审时所做的那样──则一头扎进中间人 <span class="annot" data-pop="takieddine"><em>Ziad Takieddine</em><sup>*</sup></span><div class="annot-text" id="takieddine"><strong>Ziad Takieddine</strong>(1950–2025)：法籍黎巴嫩裔军火与情报中间人，长期为法国与中东、北非政权牵线。1990 年代起活跃于巴黎政坛周边，在 Karachi 案(涉巴基斯坦军售回扣，2020 年被判 5 年实刑)与利比亚融资疑案中均属核心人物。判决后逃往黎巴嫩长期 cavale，于 2025 年 9 月在贝鲁特病逝。其反复改口的证词(一度承认见证 5000 万欧元资金交付，后又翻供)一直是利比亚融资疑案的争议焦点。</div> 那盘根错节的账目里。该律师指责控方「选择性挑材料」，并坚称这位法籍黎巴嫩裔商人收到的利比亚款项，用在了他个人开销或回扣支付上，「但不是用来给竞选做经费」。</p>
+
+  <h2 class="intertitre">六个月后宣判</h2>
+
+  <p>辩护团队中的新成员 <em>Sébastien Schapira</em> 律师则诉诸「常识」(« <em>bon sens</em> »)，反问：当一个人已经「站在 <em>Élysée</em> 门口」(« <em>aux portes de l'Élysée</em> »)，怎么可能去和「一个疯子」(« <em>un fou furieux</em> »)订下盟约？他认为，「这份案卷从第一天起就贯穿其中的、深不见底的疑问」(« <em>le doute abyssal qui traverse ce dossier depuis le premier jour</em> »)，只能导向当事人无罪释放。</p>
+
+  <p>「我无法相信，在 2026 年的法国，一个人会因为他没做过的事而被判处七年监禁──这个案子查了十四年，到头来连一份证据都没有。」<em>Sarkozy</em> 最后说。</p>
+
+  <p>再过六个月，他就会知道答案。</p>
+
+  <!-- ============================================
+       Le Figaro 同日补述 · card
+       ============================================ -->
+  <div class="card">
+    <div class="rubrique">LE FIGARO · COMPLÉMENT · P. 8</div>
+    <h1 class="titre" style="font-size:28px;">辩护团法律建构 · <em>Le Figaro</em> 同日补述</h1>
+    <p class="titre-fr">L'architecture juridique de la défense — récit complémentaire du <em>Figaro</em></p>
+
+    <p class="chapo">同一庭审日，《<em>Le Figaro</em>》N° 25426(<span class="annot" data-pop="durand-souffland"><em>Stéphane Durand-Souffland</em><sup>*</sup></span><div class="annot-text" id="durand-souffland"><strong>Stéphane Durand-Souffland</strong>：《<em>Le Figaro</em>》司法记者，长期负责重大刑事庭审现场报道。</div> 撰稿)保留下辩护陈述中更具法律技术含量的几个环节。它让人看清，这场跨度十一周的上诉辩护，最终是被什么样的法理骨架撑起来的。</p>
+
+    <h2 class="intertitre">从 <em>corruption passive</em> 倒推 <em>association de malfaiteurs</em></h2>
+
+    <p><span class="annot" data-pop="ingrain"><em>Christophe Ingrain</em><sup>*</sup></span><div class="annot-text" id="ingrain"><strong>Christophe Ingrain</strong>：巴黎刑事律师，原司法官出身，2007–2010 年曾任 <em>Sarkozy</em> 总统府技术顾问；2010 年起以合伙人身份加盟 <em>Darrois Villey Maillot Brochier</em> 事务所，2020 年正式脱离司法系统。本案 <em>Sarkozy</em> 辩护团首席律师；亦曾代理 <em>Patrick Bruel</em>、前司法部长 <em>Éric Dupond-Moretti</em>、<em>Lafarge</em> 公司等敏感案件。</div> 律师推演的拱顶是这样的：一审中，<em>Sarkozy</em> 已就 <em>corruption passive</em>(被动受贿)被宣告无罪──理由是，所谓「契约」据指应于 2005 年缔结之时，他虽身任内政部长，但金钱诉求并非以此身份提出，而一位(未来的)总统候选人也并非 <span class="annot" data-pop="depositaire">「公权力代表人」(<em>dépositaire de l'autorité publique</em>)<sup>*</sup></span><div class="annot-text" id="depositaire"><strong>dépositaire de l'autorité publique · 公权力代表人</strong>：法国刑法术语，指依法获授权代表国家行使公权力者──包括国家公务人员、市长、宪兵、警察等。<em>corruption passive</em>(被动受贿，第 432-11 条)的主体要件之一即受贿者须为「公权力代表人、负有公共服务使命之人或公职选举官员」。辩护方据此论证：候选人身份不满足此要件，故基础罪不成立──而准备实施该罪的 <em>association de malfaiteurs</em> 自然也无从存在。</div>⁠。至于所谓的对价──卡扎菲那场极尽豪华的访法、Airbus 客机的出售、核电站的出售，尤其是为<em>Guide</em>(指 <em>Kadhafi</em>)的妹夫、被法国缺席判处终身监禁的恐怖分子 <em>Abdallah Senoussi</em> 司法处境作「研究」(« <em>étude du sort judiciaire</em> »)──据 <em>Ingrain</em> 陈述，即便兑现，也是在 <em>Sarkozy</em> 入主 Élysée 之后，彼时他享有「绝对且终局的豁免」。律师由此勾勒出一幅控方陷入死胡同的图景：在他看来，法律本身就禁止 <em>Sarkozy</em> 被定罪。</p>
+
+    <p>他另以时序与财力两条辅证收紧论证。时序方面：<em>Ingrain</em> 称 <em>Senoussi</em> 的特赦「早在 2004 年就由 <span class="annot" data-pop="chirac"><em>Jacques Chirac</em><sup>*</sup></span><div class="annot-text" id="chirac"><strong>Jacques Chirac</strong>(1932–2019)：法兰西第五共和国第五任总统(1995–2007)，<em>Sarkozy</em> 的前任，亦其党内长期对手兼导师。</div> 允诺过」──彼时距 <em>Chirac</em> 卸任尚有一年半，「那为何还要向当时的内政部长讨这个对价？」财力方面：据 <em>Ingrain</em> 当庭所举数字，<strong>UMP</strong> 当年享有 3300 万欧元国家拨款，党费收入 790 万欧元，捐款 910 万欧元；<em>Sarkozy</em> 确信能拿到 <strong>UMP</strong> 的支持──「为何要去和一个素不相识的 <em>Kadhafi</em> 订下盟约？」据《<em>Le Figaro</em>》记述，<em>Ingrain</em> 最后引述一句他归予 <em>Dostoïevski</em> 的话作结：「一百只兔子凑不成一匹马，一百条嫌疑凑不出一份证据。」<span class="quote-fr">«&nbsp;cent lapins ne font pas un cheval, cent présomptions ne font pas une preuve&nbsp;»</span>(此处文学归属据律师当庭所言，文献上未见明确出处。)</p>
+
+    <h2 class="intertitre"><em>Tristan Gautier</em> 与「<em>Tak</em> 之钥」的财务反叙事</h2>
+
+    <p>承接他的 <span class="annot" data-pop="gautier"><em>Tristan Gautier</em><sup>*</sup></span><div class="annot-text" id="gautier"><strong>Tristan Gautier</strong>：<em>Darrois Villey Maillot Brochier</em> 事务所青年律师，本案 <em>Sarkozy</em> 辩护团成员，主攻金融犯罪类辩护，负责拆解 <em>Takieddine</em> 资金账目。</div> 律师被《<em>Le Figaro</em>》称为「资金流之人」(« <em>l'homme des flux financiers</em> »)。他花了数小时拆解从 <em>Ziad Takieddine</em> 私人档案中提取的<span class="annot" data-pop="cle-tak">「<em>Tak</em> 之钥」(« <em>clé Tak</em> »)<sup>*</sup></span><div class="annot-text" id="cle-tak"><strong>clé Tak · Tak 之钥</strong>：本案中对一份从 <em>Ziad Takieddine</em> 私人档案中提取的账目密钥的代称(<em>clé</em> = 钥匙 / 密钥；<em>Tak</em> 为 <em>Takieddine</em> 简称)。据《<em>Le Figaro</em>》本期报道，辩护律师 <em>Tristan Gautier</em> 花数小时拆解此密钥，以解读 <em>Takieddine</em> 自用记账系统中各笔资金的代号、归属与流向，并据此重构出辩护方的财务反叙事。该「密钥」的具体形式仅见于本案司法文件，未有庭外独立指认。</div>⁠。据 <em>Gautier</em> 重构的版本：利比亚分三笔向中间人 <em>Ziad Takieddine</em> 的 <em>Rossfield</em> 账户汇入共 600 万欧元，<em>Takieddine</em> 将之挪作两个用途──一是他本人「天文数字」的个人开销，二是付给老友 <em>Abdallah Senoussi</em> 的回扣。<em>Takieddine</em> 同时是 <em>Abdallah</em> 之子 <span class="annot" data-pop="mohamed-senoussi"><em>Mohamed Senoussi</em><sup>*</sup></span><div class="annot-text" id="mohamed-senoussi"><strong>Mohamed Senoussi</strong>：<em>Abdallah Senoussi</em>(卡扎菲妹夫、利比亚情报二把手)之子。据本案辩护方陈述，长期在伦敦过着奢靡生活，其开销由父亲通过 <em>Takieddine</em> 代垫与回款。</div> 在伦敦奢靡生活的隐形财务人，父亲会替儿子那些开销回款，或在尚未回款前先垫资。控方对此论证保有相当保留：按检察长们的版本，这条所谓「家族」资金通道根本不经 <em>Rossfield</em>，而 <em>Rossfield</em> 是按其调查所言、专门为 2007 年竞选暗资设立的结构。</p>
+
+    <h2 class="intertitre"><em>Schapira</em> 的「<em>note Koussa</em>」与 <em>Clearstream</em> 类比</h2>
+
+    <p>同列四人辩护团的 <span class="annot" data-pop="schapira"><em>Sébastien Schapira</em><sup>*</sup></span><div class="annot-text" id="schapira"><strong>Sébastien Schapira</strong>：<em>Darrois Villey Maillot Brochier</em> 事务所律师，本案 <em>Sarkozy</em> 辩护团成员；《<em>Le Figaro</em>》本期在介绍四人辩护团时单独点其名(« <em>dont Me Sébastien Schapira</em> »)。</div> 律师另起一条更具攻击性的副线，把 <span class="annot" data-pop="mediapart"><em>Mediapart</em><sup>*</sup></span><div class="annot-text" id="mediapart"><strong>Mediapart</strong>：法国调查性新闻网站，2008 年由 <em>Edwy Plenel</em> 等创办，付费订阅独立运作；利比亚融资疑案最核心的爆料媒体，自 2012 年起持续披露相关材料。</div> 公布的 <span class="annot" data-pop="note-koussa">«&nbsp;<em>note Koussa</em>&nbsp;»<sup>*</sup></span><div class="annot-text" id="note-koussa"><strong>note Koussa · Koussa 笔记</strong>：<em>Mediapart</em> 于 2012 年 4 月 28 日(即 <em>Sarkozy</em>-<em>Hollande</em> 决选投票前夜)公布的一份阿拉伯语文件，标注日期 2006 年 12 月 10 日，落款据指为时任利比亚对外情报局局长 <em>Moussa Koussa</em>，收件人为 <em>Bachir Saleh</em>(卡扎菲办公室主任、利比亚主权基金负责人)。文件内容载有 5000 万欧元资助 <em>Sarkozy</em> 2007 年竞选的协议表述。<em>Koussa</em> 于 2014 年 8 月 5 日受讯时声明：「内容并非伪造，但签名不是我签的」；其后法国司法机关委托的三名笔迹鉴定专家在 2014 年 11 月 6 日的一致意见中认定，签名为其本人所书。该文件的真伪与归属至今仍是本案争议焦点之一。</div>⁠ 与 <span class="annot" data-pop="clearstream"><em>Clearstream</em> 案<sup>*</sup></span><div class="annot-text" id="clearstream"><strong>Affaire Clearstream</strong>：2004 年起爆发的伪造金融名单丑闻──一份伪造名单声称多名法国政要(含 <em>Sarkozy</em>)在卢森堡 <em>Clearstream</em> 公司持有秘密账户，事后被司法机关认定系伪造。2010 年判决中，<em>Dominique de Villepin</em> 一审被免罪，2011 年上诉确认无罪；前国防部副总署高官 <em>Jean-Louis Gergorin</em> 与公关人 <em>Imad Lahoud</em> 被判处实刑。<em>Sarkozy</em> 当年作为民事方参诉。该案在法国政坛留下「政治抹黑工程必有伪造者藏身幕后」的范本。<em>Schapira</em> 此处的类比意图即此──把 <em>note Koussa</em> 归入「伪造-抹黑」框架。</div>⁠ 并置──「在伪造文件背后，必有一位伪造者，必有一场操纵。」<span class="quote-fr">«&nbsp;Derrière le faux, il y a un faussaire et une manipulation.&nbsp;»</span></p>
+
+    <p>据 <em>Durand-Souffland</em> 转述，<em>Schapira</em> 把这场操纵的「父系归属」(« <em>paternité</em> »)归于卡扎菲家族阵营，首推卡扎菲之子 <span class="annot" data-pop="saif"><em>Saïf al-Islam</em><sup>*</sup></span><div class="annot-text" id="saif"><strong>Saïf al-Islam Kadhafi</strong>：<em>Mouammar Kadhafi</em> 之次子。2011 年 3 月，他对 <em>Euronews</em> 首次公开指控 <em>Sarkozy</em> 接受过其父政权的竞选资金，开启整个「利比亚融资疑案」舆论线。2018 年向预审法官 <em>Serge Tournaire</em> 致信重申该指控。2025 年 1 月(即一审在巴黎开庭后两周)，他再次通过中间人向 <em>RFI</em> 书面声明：曾遭 <em>Sarkozy</em> 团队多次施压、要求他改证。本案辩护团此处所做的「指控伪造者」逆袭，即把整套书证(含 <em>note Koussa</em>)的伪造主体归到 <em>Saïf al-Islam</em> 及其阵营，作为对其证词整体可靠性的根本性质疑。</div>⁠。至于周二刚被 <em>Sarkozy</em> 前心腹 <em>Guéant</em> 的律师以「极强烈姿态」用作攻击 <em>Sarkozy</em> 论据的那份书面陈述，<em>Schapira</em> 周三反向给出处理：「没必要为此小题大做。」<em>Schapira</em> 与压阵的 <span class="annot" data-pop="darrois"><em>Jean-Michel Darrois</em><sup>*</sup></span><div class="annot-text" id="darrois"><strong>Jean-Michel Darrois</strong>：法国商法-刑事资深律师，<em>Darrois Villey Maillot Brochier</em> 事务所创始合伙人；<em>Sarkozy</em> 长期律师之一，本案辩护团的资深成员。</div> 律师接下来只剩「锦上添花」的空间，<em>Darrois</em> 以一句对预审工作的总评收尾──「一份带方向、薄弱的预审」(« <em>une instruction orientée et faible</em> »)。</p>
+
+    <h2 class="intertitre"><em>Sarkozy</em> 的另一组陈述</h2>
+
+    <p>《<em>Le Figaro</em>》的同日记录也保留了 <em>Sarkozy</em> 最后陈述中《<em>Le Parisien</em>》未选取的几句──其中最直白的一句被该报作为引语提出：</p>
+
+    <blockquote class="lead">
+      <div class="zh">「这桩所谓针对我竞选的利比亚融资案，始于谎言与阴谋，必须终于真相与透明。」</div>
+      <div class="fr">«&nbsp;Cette affaire de prétendu financement libyen de ma campagne a commencé dans le mensonge et le complot et doit finir dans la vérité et la transparence.&nbsp;»</div>
+      <span class="src">── Nicolas Sarkozy</span>
+    </blockquote>
+
+    <p>他没有点名「撒谎者」与「阴谋家」，只说「他们自己心里清楚」。他坦承「我曾天真过」──十四年来反反复复地回答问题、配合调查、陈述、争辩，到「快被逼疯的程度」，每次以为合上了一份档案就「终于！」，但「这都还不够」。「人们说我以为自己凌驾于法律之上。<em>Mon Dieu</em>！恰恰相反──我希望以我之所是、而非我之所代表受审。」《<em>Le Figaro</em>》在此处补入一句简短的事实标注：陈述这番话的，是<span class="annot" data-pop="autres-condamnations">「曾领导这个国家、并已在另外两宗案件中被终局定罪」<sup>*</sup></span><div class="annot-text" id="autres-condamnations"><strong>Sarkozy 其他两宗终局定罪</strong>：① <strong>Bismuth 案(窃听案)</strong>──corruption + trafic d'influence。2024 年 12 月经最高法院(<em>Cour de cassation</em>)驳回上诉成为终局，判处 3 年监禁、其中 1 年实刑(折为电子镯监管)。<em>Sarkozy</em> 于 2025 年 2 月至 5 月佩戴电子镯，因年龄获条件释放。② <strong>Bygmalion 案</strong>──2012 年竞选超额开支与假发票系统。2024 年 2 月上诉法院判处 1 年监禁、其中 6 个月实刑(部分可减替执行)，2025 年 11 月 26 日经 <em>Cour de cassation</em> 驳回上诉成为终局。<em>Sarkozy</em> 由此成为第五共和国首位拥有两份终局刑事判决的前总统。本利比亚案为其面临的第三宗大案。</div>⁠ 的人。</p>
+
+    <h2 class="intertitre">记者的批判性插话</h2>
+
+    <p>《<em>Le Figaro</em>》记者笔下还有一处别样的处理──不像《<em>Le Parisien</em>》的 <span class="annot" data-pop="boutry"><em>Timothée Boutry</em><sup>*</sup></span><div class="annot-text" id="boutry"><strong>Timothée Boutry</strong>：《<em>Le Parisien</em>》司法-警务条线长期记者，本案 <em>Le Parisien</em> 上诉庭审报道执笔人。</div> 那样压抑作者声音，<em>Durand-Souffland</em> 在 <em>Ingrain</em> 那段长论推进至深处时，直接给出评估：律师为了支撑论证，「不得不接住一些远不如其他论据有说服力的前提」。具体的例证是：<em>Sarkozy</em> 在庭上自陈，他并未亲选 <span class="annot" data-pop="gueant"><em>Claude Guéant</em><sup>*</sup></span><div class="annot-text" id="gueant"><strong>Claude Guéant</strong>：<em>Sarkozy</em> 长期核心幕僚。曾任内政部办公室主任(2002–2007)、总统府秘书长(2007–2011)、内政部长(2011–2012)。本案共同被告之一，因健康原因缺席本次上诉庭审。其书面陈述被检方与共同被告律师用作攻击 <em>Sarkozy</em> 的论据。</div> 任内政部办公室主任，也并未亲选 <span class="annot" data-pop="hortefeux"><em>Brice Hortefeux</em><sup>*</sup></span><div class="annot-text" id="hortefeux"><strong>Brice Hortefeux</strong>：<em>Sarkozy</em> 多年密友与政治旅伴。2005–2007 年任 <em>ministre délégué aux Collectivités territoriales</em>(在 Villepin 政府下，直属时任内政部长 <em>Sarkozy</em>)，2007–2009 年任 <em>ministre de l'Immigration</em>，2009–2011 年任内政部长。本案共同被告之一。</div> 任 <em>ministre délégué</em>──但 <em>Guéant</em> 自己的书面陈述已把这套版本「磕掉了一角」；而要相信 2005 年 <em>Chirac</em> 与 <span class="annot" data-pop="villepin"><em>Dominique de Villepin</em><sup>*</sup></span><div class="annot-text" id="villepin"><strong>Dominique de Villepin</strong>：法国前总理(2005–2007)，<em>Sarkozy</em> 党内长期宿敌。曾因 <em>Clearstream</em> 案受审，2010 年一审免罪、2011 年上诉确认无罪。</div> 在不得不召回一位「被嫌弃的」<em>Sarkozy</em> 入阁时，会硬塞他「最好的朋友」<em>Hortefeux</em> 做副职「以更好地羞辱他」，「需要相当的想象力才行」。两份报道存在笔触上的这种差异，因而并置摘译：《<em>Le Parisien</em>》给出「<em>Sarkozy</em> 这个人」──情绪、宗教意象、十四年苦路；《<em>Le Figaro</em>》给出「这场辩护的法理结构」──罪名链、资金流、伪造者的归属、记者对辩护前提的实地评估。</p>
+
+  </div>
+</section>
+
+</article>
+
+<!-- ============================================
+     回到顶部
+     ============================================ -->
+<button class="back-top" id="backTop" aria-label="回到顶部">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+       stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+       stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+</button>
+
+<!-- ============================================
+     版权
+     ============================================ -->
+<div class="copyright">
+  <div class="zh-block">
+    <p>主报道摘译自《<em>Le Parisien</em>》· 2026 年 5 月 28 日 · N° 25430</p>
+    <p>Sarkozy 章节 P. 8 部分补述自《<em>Le Figaro</em>》· 2026 年 5 月 28 日 · N° 25426</p>
+    <p><em>Le Parisien</em> 原文参见：<em class="kiosque-link">kiosque.leparisien.fr</em> · 翻至 2026 年 5 月 28 日刊</p>
+    <p><em>Le Figaro</em> 原文参见：<em class="kiosque-link">lefigaro.fr</em> 主站 Mon compte；或通过 Kiosque Figaro 应用(iOS / Android)访问当期日刊</p>
+    <p>原文著作权分别归 Le Parisien libéré SAS 与 Société du Figaro SAS 所有 — <em>Tous droits réservés</em></p>
+    <p>本页为摘译稿，仅供个人法语学习</p>
+    <p>禁止任何商业用途、复制转载、改编、上传或二次出版页面内容</p>
+    <p>如需引用，请以《<em>Le Parisien</em>》《<em>Le Figaro</em>》原报道为准并标明出处</p>
+  </div>
+  <div class="divider"></div>
+  <div class="fr-block">
+    <p>Traduction partielle du <em>Parisien</em> · 28 mai 2026 · N° 25430</p>
+    <p>Récit complémentaire — section Sarkozy P. 8 — du <em>Figaro</em> · 28 mai 2026 · N° 25426</p>
+    <p><em>Parisien</em> · article original : <em class="kiosque-link">kiosque.leparisien.fr</em> · naviguer au journal du 28 mai 2026</p>
+    <p><em>Figaro</em> · article original : <em class="kiosque-link">lefigaro.fr</em> (Mon compte) ou via l'application Kiosque Figaro (iOS / Android), accès au PDF du jour</p>
+    <p>Tous les droits d'auteur appartiennent respectivement à Le Parisien libéré SAS et à la Société du Figaro SAS — <em>Tous droits réservés</em></p>
+    <p>Traduction abrégée à usage personnel pour l'apprentissage du français.</p>
+    <p>Toute reproduction commerciale, retransmission, adaptation, mise en ligne ou réédition du contenu de cette page est interdite.</p>
+    <p>Pour toute citation, se référer aux reportages originaux du <em>Parisien</em> et du <em>Figaro</em> et indiquer la source.</p>
+  </div>
+  <div class="claude-mark-foot">Claude [Anthropic] 译</div>
+</div>
+
+<script>
+// 注释开关
+const notesToggle = document.getElementById('notesToggle');
+const notesBtnLabel = document.getElementById('notesBtnLabel');
+const body = document.body;
+
+notesToggle.addEventListener('click', () => {
+  body.classList.toggle('notes-open');
+  notesBtnLabel.textContent = body.classList.contains('notes-open')
+    ? 'Hide notes' : 'Notes';
+});
+
+// 点击单个注释词触发
+document.querySelectorAll('.annot').forEach(el => {
+  el.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const id = el.dataset.pop;
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (!target) return;
+    // 关掉其他打开的
+    document.querySelectorAll('.annot-text.open').forEach(t => {
+      if (t !== target) t.classList.remove('open');
+    });
+    target.classList.toggle('open');
+  });
+});
+
+// 点击外部关闭单独打开的注释
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.annot') && !e.target.closest('.annot-text')) {
+    document.querySelectorAll('.annot-text.open').forEach(t => {
+      t.classList.remove('open');
+    });
+  }
+});
+
+// 回到顶部
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 600) {
+    backTop.classList.add('visible');
+  } else {
+    backTop.classList.remove('visible');
+  }
+});
+backTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>
